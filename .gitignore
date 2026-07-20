@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.DS_Store
+coverage/
+
+# Config de editor (personal, no del proyecto)
+.idea/
+.vscode/

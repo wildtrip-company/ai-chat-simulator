@@ -1,0 +1,33 @@
+{
+  "name": "@wildtrip-company/meta-api",
+  "version": "0.1.0",
+  "description": "Cliente tipado de la API de Meta (WhatsApp Cloud, Messenger, Instagram) con recepción de webhooks agnóstica del framework.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": false,
+  "files": ["dist"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wildtrip-company/ai-chat-simulator.git",
+    "directory": "packages/meta-api"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": ["meta", "whatsapp", "messenger", "instagram", "webhook", "graph-api"]
+}

@@ -1,0 +1,105 @@
+/*
+ * Panel del simulador: estética de instrumento de banco, no de app de chat.
+ * Es una herramienta de diagnóstico, y se ve como tal.
+ *
+ * Tipografía monoespaciada del sistema a propósito: un dev tool tiene que
+ * arrancar sin red, y una webfont remota lo haría depender de un CDN.
+ */
+
+:root {
+  --bg: #0a0c0d;
+  --panel: #101416;
+  --panel-raised: #161b1e;
+  --line: #232b30;
+  --line-bright: #334047;
+
+  --ink: #dce5e9;
+  --ink-dim: #7d8f99;
+  --ink-faint: #4a585f;
+
+  /* El usuario simulado es ámbar; tu app, cian. Nunca se confunden. */
+  --user: #f0a24b;
+  --user-glow: #f0a24b26;
+  --app: #4fc3d9;
+  --app-glow: #4fc3d926;
+  --ok: #6ec98a;
+  --bad: #e5645c;
+
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+
+  --rhythm: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  /* Retícula tenue: da la sensación de papel milimetrado de laboratorio. */
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  height: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--user);
+  color: #0a0c0d;
+}
+
+/* Scrollbars al tono del panel; las del sistema rompen la ilusión. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border: 3px solid var(--bg);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--line-bright);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "name": "@wildtrip-company/meta-simulator",
+  "version": "0.1.0",
+  "description": "Servidor de desarrollo que finge ser la API de Meta: recibe envíos, dispara webhooks firmados y opcionalmente responde con IA. Se instala como devDependency.",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wildtrip-company/ai-chat-simulator.git",
+    "directory": "packages/meta-simulator"
+  },
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "meta-simulator": "./dist/bin.js"
+  },
+  "scripts": {
+    "build": "rm -rf dist && vite build --config ui/vite.config.ts && tsc -p tsconfig.json && chmod +x dist/bin.js",
+    "build:ui": "vite build --config ui/vite.config.ts",
+    "dev:ui": "vite --config ui/vite.config.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@wildtrip-company/meta-api": "workspace:^"
+  },
+  "peerDependencies": {
+    "@ai-sdk/anthropic": "^2.0.0",
+    "ai": "^7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@ai-sdk/anthropic": {
+      "optional": true
+    },
+    "ai": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "meta",
+    "whatsapp",
+    "messenger",
+    "instagram",
+    "mock",
+    "simulator",
+    "testing"
+  ],
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.2.0",
+    "svelte": "^5.56.6",
+    "svelte-check": "^4.7.3",
+    "vite": "^8.1.5"
+  }
+}

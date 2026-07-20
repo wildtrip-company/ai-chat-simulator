@@ -1,0 +1,37 @@
+name: Release
+
+# Publica en GitHub Packages al pushear un tag `v*`, p. ej. `v0.1.0`.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # Sin esto el push al registry falla con 403.
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          # Escribe el ~/.npmrc con la credencial, que es donde pnpm sí expande
+          # variables de entorno (en el .npmrc del repo las ignora a propósito).
+          registry-url: https://npm.pkg.github.com
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm test
+
+      # `--no-git-checks` porque el tag ya es el punto de verdad de la versión.
+      - run: pnpm -r --filter './packages/*' publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
